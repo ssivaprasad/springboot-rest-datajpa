@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,4 +38,11 @@ public class UserController {
         return "Get user By Id was called : " + id;
     }
 
+
+    @GetMapping("/pagigation")
+    public String getUsers(@RequestParam int page, @RequestParam int limit,
+            @RequestParam String order) {
+        return String.format("Get All users called with pagination: page: %s, limit: %s, order: %s",
+                page, limit, order);
+    }
 }
