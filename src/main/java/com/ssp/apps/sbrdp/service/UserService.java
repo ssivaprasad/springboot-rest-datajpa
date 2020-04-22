@@ -1,5 +1,6 @@
 package com.ssp.apps.sbrdp.service;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ public class UserService {
         return userDao.deleteUser(userId);
     }
 
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
 
     public User getUser(int userId) {
         Optional<User> retriedUser = userDao.getUser(userId);

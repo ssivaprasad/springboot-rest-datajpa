@@ -1,7 +1,7 @@
 package com.ssp.apps.sbrdp.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,39 +12,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.ssp.apps.sbrdp.dto.User;
+import com.ssp.apps.sbrdp.service.UserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping
     public User createUser(@RequestBody User user) {
-        return user;
+        return userService.createUser(user);
     }
 
-    @PutMapping
-    public User updateUser(@RequestBody User user) {
-        return user;
+    @PutMapping("/{id}")
+    public void updateUser(@PathVariable Integer id, @RequestBody User user) {
+        userService.updateUser(user);
     }
 
-    @DeleteMapping
-    public String deleteUser() {
-        return "Delete user was called";
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Integer id) {
+        userService.deleteUser(id);
     }
 
     @GetMapping
-    public String getUsers() {
-        return "Get All users was called";
+    public List<User> getUsers() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
-
-        if (id < 30) {
-            return new ResponseEntity<User>(new User(id), HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<User>(new User(1, "Richardson", "I_Wont_Tell_You@fasak.com"),
-                HttpStatus.OK);
+    public User getUserById(@PathVariable Integer id) {
+        return userService.getUser(id);
     }
 
 

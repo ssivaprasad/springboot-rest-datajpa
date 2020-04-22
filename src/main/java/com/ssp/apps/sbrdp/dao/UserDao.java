@@ -1,8 +1,10 @@
 package com.ssp.apps.sbrdp.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Repository;
 import com.ssp.apps.sbrdp.dto.User;
 
@@ -15,9 +17,15 @@ public class UserDao {
     public User createUser(User user) {
         Integer generateUserId = generateUserId();
 
-        users.put(generateUserId, new User(generateUserId, user.getName(), user.getEmail()));
+        User createdUser = new User(generateUserId, user.getName(), user.getEmail());
+        users.put(generateUserId, createdUser);
 
-        return user;
+        return createdUser;
+    }
+
+
+    public List<User> getAllUsers() {
+        return users.values().stream().collect(Collectors.toList());
     }
 
     public Optional<User> getUser(int userId) {
