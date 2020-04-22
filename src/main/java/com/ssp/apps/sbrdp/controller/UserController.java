@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.ssp.apps.sbrdp.dto.User;
 
 @RestController
 @RequestMapping("/users")
@@ -34,8 +35,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUserById(@PathVariable String id) {
-        return "Get user By Id was called : " + id;
+    public User getUserById(@PathVariable String id) {
+        return new User(1, "Richardson", "I_Wont_Tell_You@fasak.com");
     }
 
 
