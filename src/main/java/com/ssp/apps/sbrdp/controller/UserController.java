@@ -1,5 +1,7 @@
 package com.ssp.apps.sbrdp.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,8 +37,13 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable String id) {
-        return new User(1, "Richardson", "I_Wont_Tell_You@fasak.com");
+    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+
+        if (id < 30) {
+            return new ResponseEntity<User>(new User(id), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<User>(new User(1, "Richardson", "I_Wont_Tell_You@fasak.com"),
+                HttpStatus.OK);
     }
 
 

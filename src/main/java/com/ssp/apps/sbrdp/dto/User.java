@@ -12,7 +12,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
     private Integer userId;
     private String name;
     private String email;
+
+    public User(Integer userId) {
+        this.userId = userId;
+    }
 }
