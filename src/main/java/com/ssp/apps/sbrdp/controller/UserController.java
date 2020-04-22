@@ -40,7 +40,7 @@ public class UserController {
 
 
     @GetMapping("/pagigation")
-    public String getUsers(@RequestParam int page, @RequestParam int limit,
+    public String getUsers(@RequestParam int page, @RequestParam(required = false) int limit,
             @RequestParam String order) {
         return String.format("Get All users called with pagination: page: %s, limit: %s, order: %s",
                 page, limit, order);
