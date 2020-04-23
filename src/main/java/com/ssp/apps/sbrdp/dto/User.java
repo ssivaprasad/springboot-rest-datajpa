@@ -1,5 +1,8 @@
 package com.ssp.apps.sbrdp.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,13 +14,17 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "user_dtl")
 public class User {
 
-    private Integer userId;
+    @Id
+    private String userId;
+
     private String name;
     private String email;
 
-    public User(Integer userId) {
+    public User(String userId) {
         this.userId = userId;
     }
 }

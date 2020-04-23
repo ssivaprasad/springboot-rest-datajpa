@@ -2,9 +2,10 @@ package com.ssp.apps.sbrdp.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ssp.apps.sbrdp.dao.UserDao;
+import com.ssp.apps.sbrdp.dao.UserRepository;
 import com.ssp.apps.sbrdp.dto.User;
 import com.ssp.apps.sbrdp.exception.DuplicateUserException;
 import com.ssp.apps.sbrdp.exception.UserNotFoundException;
@@ -13,41 +14,39 @@ import com.ssp.apps.sbrdp.exception.UserNotFoundException;
 public class UserService {
 
     @Autowired
-    private UserDao userDao;
-
-    public UserService(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    private UserRepository userRepository;
 
     public User createUser(User user) {
-        Optional<User> retriedUser = userDao.getUser(user.getName());
+        Optional<User> retriedUser = userRepository.findByName(user.getName());
         retriedUser.ifPresent((tempUser) -> {
             throw new DuplicateUserException();
         });
-        return userDao.createUser(user);
+
+        user.setUserId(UUID.randomUUID().toString());
+        return userRepository.save(user);
     }
 
-    public boolean updateUser(User user) {
-        Optional<User> retriedUser = userDao.getUser(user.getUserId());
+    public void updateUser(User user) {
+        Optional<User> retriedUser = userRepository.findById(user.getUserId());
         retriedUser.orElseThrow(() -> new UserNotFoundException());
 
-        return userDao.updateUser(user);
+        userRepository.save(user);
     }
 
 
-    public boolean deleteUser(int userId) {
-        Optional<User> retriedUser = userDao.getUser(userId);
+    public void deleteUser(String userId) {
+        Optional<User> retriedUser = userRepository.findById(userId);
         retriedUser.orElseThrow(() -> new UserNotFoundException());
 
-        return userDao.deleteUser(userId);
+        userRepository.deleteById(userId);
     }
 
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        return (List<User>) userRepository.findAll();
     }
 
-    public User getUser(int userId) {
-        Optional<User> retriedUser = userDao.getUser(userId);
+    public User getUser(String userId) {
+        Optional<User> retriedUser = userRepository.findById(userId);
         retriedUser.orElseThrow(() -> new UserNotFoundException());
 
         return retriedUser.get();
