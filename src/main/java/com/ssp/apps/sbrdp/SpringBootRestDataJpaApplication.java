@@ -21,9 +21,9 @@ public class SpringBootRestDataJpaApplication {
 
             @Override
             public void run(String... args) throws Exception {
-                userService.createUser(new User("Siva", "dumm1@nodomain.com"));
-                userService.createUser(new User("Prasad", "dumm2@nodomain.com"));
-                userService.createUser(new User("Somarouthu", "dumm2@nodomain.com"));
+                userService.createUser(new User("Siva", "dummy1@nodomain.com"));
+                userService.createUser(new User("Prasad", "dummy2@nodomain.com"));
+                userService.createUser(new User("Somarouthu", "dummy3@nodomain.com"));
             }
         };
 

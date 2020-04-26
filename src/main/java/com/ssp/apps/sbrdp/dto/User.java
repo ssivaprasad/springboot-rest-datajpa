@@ -19,13 +19,13 @@ import lombok.ToString;
 public class User {
 
     @Id
-    private String userId;
+    private String id;
 
     private String name;
     private String email;
 
-    public User(String userId) {
-        this.userId = userId;
+    public User(String id) {
+        this.id = id;
     }
 
     public User(String name, String email) {

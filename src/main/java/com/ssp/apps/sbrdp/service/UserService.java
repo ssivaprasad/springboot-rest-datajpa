@@ -22,12 +22,12 @@ public class UserService {
             throw new DuplicateUserException();
         });
 
-        user.setUserId(UUID.randomUUID().toString());
+        user.setId(UUID.randomUUID().toString());
         return userRepository.save(user);
     }
 
     public void updateUser(User user) {
-        Optional<User> retriedUser = userRepository.findById(user.getUserId());
+        Optional<User> retriedUser = userRepository.findById(user.getId());
         retriedUser.orElseThrow(() -> new UserNotFoundException());
 
         userRepository.save(user);
