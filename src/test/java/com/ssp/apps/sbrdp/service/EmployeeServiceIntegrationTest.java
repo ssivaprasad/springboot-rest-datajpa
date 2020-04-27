@@ -7,21 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.ssp.apps.sbrdp.SpringBootRestDataJpaApplication;
-import com.ssp.apps.sbrdp.dto.User;
+import com.ssp.apps.sbrdp.dto.Employee;
 import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootRestDataJpaApplication.class)
 @Slf4j
-public class UserServiceIntegrationTest {
+public class EmployeeServiceIntegrationTest {
 
     @Autowired
-    private UserService userService;
+    private EmployeeService employeeService;
 
     @Test
-    public void findAllUsers() {
-        List<User> users = userService.getAllUsers();
-        users.stream().forEach(user -> log.info("== >> USer Details: {}", user));
+    public void findAllEmployees() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        employees.stream().forEach(employee -> log.info("== >> USer Details: {}", employee));
     }
 
 }

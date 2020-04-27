@@ -15,8 +15,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "user_dtl")
-public class User {
+@Table(name = "employee_dtl")
+public class Employee {
 
     @Id
     private String id;
@@ -24,11 +24,11 @@ public class User {
     private String name;
     private String email;
 
-    public User(String id) {
+    public Employee(String id) {
         this.id = id;
     }
 
-    public User(String name, String email) {
+    public Employee(String name, String email) {
         this.name = name;
         this.email = email;
     }

@@ -5,8 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import com.ssp.apps.sbrdp.dto.User;
-import com.ssp.apps.sbrdp.service.UserService;
+import com.ssp.apps.sbrdp.dto.Employee;
+import com.ssp.apps.sbrdp.service.EmployeeService;
 
 @SpringBootApplication
 public class SpringBootRestDataJpaApplication {
@@ -16,14 +16,14 @@ public class SpringBootRestDataJpaApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(@Autowired UserService userService) {
+    public CommandLineRunner commandLineRunner(@Autowired EmployeeService employeeService) {
         return new CommandLineRunner() {
 
             @Override
             public void run(String... args) throws Exception {
-                userService.createUser(new User("Siva", "dummy1@nodomain.com"));
-                userService.createUser(new User("Prasad", "dummy2@nodomain.com"));
-                userService.createUser(new User("Somarouthu", "dummy3@nodomain.com"));
+                employeeService.createEmployee(new Employee("Siva", "dummy1@nodomain.com"));
+                employeeService.createEmployee(new Employee("Prasad", "dummy2@nodomain.com"));
+                employeeService.createEmployee(new Employee("Somarouthu", "dummy3@nodomain.com"));
             }
         };
 

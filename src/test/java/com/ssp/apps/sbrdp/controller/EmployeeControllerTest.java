@@ -24,12 +24,12 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssp.apps.sbrdp.dto.User;
-import com.ssp.apps.sbrdp.service.UserService;
+import com.ssp.apps.sbrdp.dto.Employee;
+import com.ssp.apps.sbrdp.service.EmployeeService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(UserController.class)
-public class UserControllerTest {
+@WebMvcTest(EmployeeController.class)
+public class EmployeeControllerTest {
 
     private static final String APPLICATION_JSON_VALUE = MediaType.APPLICATION_JSON_VALUE;
 
@@ -40,15 +40,15 @@ public class UserControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private UserService userService;
+    private EmployeeService employeeService;
 
     @Test
-    public void testGetAllUsers() throws Exception {
-        List<User> users = new ArrayList<User>();
-        users.add(new User("123", "Somarouthu", "dummy@Test.com"));
-        when(userService.getAllUsers()).thenReturn(users);
+    public void testGetAllEmployees() throws Exception {
+        List<Employee> employees = new ArrayList<Employee>();
+        employees.add(new Employee("123", "Somarouthu", "dummy@Test.com"));
+        when(employeeService.getAllEmployees()).thenReturn(employees);
 
-        mockmvc.perform(get("/users")).andExpect(status().isOk())
+        mockmvc.perform(get("/employees")).andExpect(status().isOk())
                 .andExpect((ResultMatcher) jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$.[0].name").value("Somarouthu"))
                 .andExpect(jsonPath("$.[0].email").value("dummy@Test.com"));
@@ -56,23 +56,24 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testGetAllUsers_should_be_empty() throws Exception {
-        when(userService.getAllUsers()).thenReturn(null);
+    public void testGetAllEmployees_should_be_empty() throws Exception {
+        when(employeeService.getAllEmployees()).thenReturn(null);
 
-        mockmvc.perform(get("/users")).andExpect(status().isOk())
+        mockmvc.perform(get("/employees")).andExpect(status().isOk())
                 .andExpect((ResultMatcher) jsonPath("$").doesNotExist());
     }
 
 
     @Test
     public void testSave() throws Exception {
-        User userResponse = new User("xxxxx", "Siva", "lsdhf");
-        User userRequest = new User(null, "Somarouthu", "lsdhf");
+        Employee employeeResponse = new Employee("xxxxx", "Siva", "lsdhf");
+        Employee employeeRequest = new Employee(null, "Somarouthu", "lsdhf");
 
-        when(userService.createUser(any(User.class))).thenReturn(userResponse);
+        when(employeeService.createEmployee(any(Employee.class))).thenReturn(employeeResponse);
 
-        MockHttpServletRequestBuilder request = post("/users").contentType(APPLICATION_JSON_VALUE)
-                .content(asJsonValue(userRequest)).accept(APPLICATION_JSON_VALUE);
+        MockHttpServletRequestBuilder request =
+                post("/employees").contentType(APPLICATION_JSON_VALUE)
+                        .content(asJsonValue(employeeRequest)).accept(APPLICATION_JSON_VALUE);
 
         mockmvc.perform(request).andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Siva"));
@@ -80,24 +81,24 @@ public class UserControllerTest {
 
 
     @Test
-    public void deleteUser() throws Exception {
-        doNothing().when(userService).deleteUser(any(String.class));
-        mockmvc.perform(delete("/users/123").contentType(APPLICATION_JSON_VALUE)
+    public void deleteEmployee() throws Exception {
+        doNothing().when(employeeService).deleteEmployee(any(String.class));
+        mockmvc.perform(delete("/employees/123").contentType(APPLICATION_JSON_VALUE)
                 .accept(APPLICATION_JSON_VALUE)).andExpect(status().isOk())
                 .andExpect(jsonPath("$").doesNotExist());
     }
 
     @Test
-    public void updateUser() throws Exception {
-        doNothing().when(userService).updateUser(any(User.class));
-        mockmvc.perform(put("/users/123").contentType(APPLICATION_JSON_VALUE)
-                .content(asJsonValue(new User("xxxxx", "Siva", "lsdhf")))
+    public void updateEmployee() throws Exception {
+        doNothing().when(employeeService).updateEmployee(any(Employee.class));
+        mockmvc.perform(put("/employees/123").contentType(APPLICATION_JSON_VALUE)
+                .content(asJsonValue(new Employee("xxxxx", "Siva", "lsdhf")))
                 .accept(APPLICATION_JSON_VALUE)).andExpect(status().isOk())
                 .andExpect(jsonPath("$").doesNotExist());
     }
 
-    private String asJsonValue(User user) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(user);
+    private String asJsonValue(Employee employee) throws JsonProcessingException {
+        return objectMapper.writeValueAsString(employee);
     }
 
 }

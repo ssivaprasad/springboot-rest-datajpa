@@ -1,2 +1,2 @@
-insert into user_dtl (user_id, name, email) values (122, 'dummy_user1', 'dummy_email_1@nodomain.com')
-insert into user_dtl (user_id, name, email) values (213, 'dummy_user2', 'dummy_email_2@nodomain.com')
+insert into employee_dtl (id, name, email) values (122, 'dummy_user1', 'dummy_email_1@nodomain.com')
+insert into employee_dtl (id, name, email) values (213, 'dummy_user2', 'dummy_email_2@nodomain.com')

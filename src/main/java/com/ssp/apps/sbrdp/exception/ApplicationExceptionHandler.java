@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ApplicationExceptionHandler {
 
     // @ExceptionHandler(RuntimeException.class)
-    @ExceptionHandler(value = {DuplicateUserException.class, UserNotFoundException.class})
+    @ExceptionHandler(value = {DuplicateEmployeeException.class, EmployeeNotFoundException.class})
     public ResponseEntity<Object> handleRuntimeException(Exception ex, HttpServletRequest request) {
         // System.out.println("== >> " + request.getHeader("User-Agent"));
         return new ResponseEntity<Object>("Wowwwww... Sad to hear that some thing went wrong.",
