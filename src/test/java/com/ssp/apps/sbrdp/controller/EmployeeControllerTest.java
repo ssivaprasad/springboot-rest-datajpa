@@ -15,9 +15,13 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -28,7 +32,11 @@ import com.ssp.apps.sbrdp.entity.Employee;
 import com.ssp.apps.sbrdp.service.EmployeeService;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(EmployeeController.class)
+@WebMvcTest(value = EmployeeController.class, excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebSecurity.class)})
+// @WebMvcTest(value = EmployeeController.class, excludeFilters = {
+// @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = SecurityConfiguration.class)})
+@AutoConfigureMockMvc(addFilters = false)
 public class EmployeeControllerTest {
 
     private static final String APPLICATION_JSON_VALUE = MediaType.APPLICATION_JSON_VALUE;
