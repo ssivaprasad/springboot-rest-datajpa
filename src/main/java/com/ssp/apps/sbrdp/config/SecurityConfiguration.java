@@ -8,12 +8,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import com.ssp.apps.sbrdp.service.UserDetailsService;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -35,7 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
          * );
          */
 
-        auth.jdbcAuthentication().dataSource(dataSource);
+        /* auth.jdbcAuthentication().dataSource(dataSource); */
+
+        auth.userDetailsService(userDetailsService);
     }
 
 

@@ -8,3 +8,6 @@ INSERT INTO users (username, password, enabled) values ('admin','pass',true);
 
 INSERT INTO authorities (username,authority) values ('user','ROLE_USER');
 INSERT INTO authorities (username,authority) values ('admin','ROLE_ADMIN');
+
+INSERT INTO app_users (username, password, enabled, roles) values ('user','pass',true, 'ROLE_USER');
+INSERT INTO app_users (username, password, enabled, roles) values ('admin','pass',true, 'ROLE_USER,ROLE_ADMIN');
