@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssp.apps.sbrdp.dto.Employee;
+import com.ssp.apps.sbrdp.entity.Employee;
 import com.ssp.apps.sbrdp.service.EmployeeService;
 
 @RunWith(SpringRunner.class)
@@ -102,3 +102,5 @@ public class EmployeeControllerTest {
     }
 
 }
+
+

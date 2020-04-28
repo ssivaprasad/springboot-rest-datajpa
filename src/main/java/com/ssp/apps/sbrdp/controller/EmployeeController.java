@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.ssp.apps.sbrdp.dto.Employee;
+import com.ssp.apps.sbrdp.entity.Employee;
 import com.ssp.apps.sbrdp.service.EmployeeService;
 
 @RestController

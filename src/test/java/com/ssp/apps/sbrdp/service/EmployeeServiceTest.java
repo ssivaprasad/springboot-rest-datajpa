@@ -17,7 +17,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import com.ssp.apps.sbrdp.dao.EmployeeRepository;
-import com.ssp.apps.sbrdp.dto.Employee;
+import com.ssp.apps.sbrdp.entity.Employee;
 import com.ssp.apps.sbrdp.exception.DuplicateEmployeeException;
 import com.ssp.apps.sbrdp.exception.EmployeeNotFoundException;
 

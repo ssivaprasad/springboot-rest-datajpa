@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ssp.apps.sbrdp.dao.EmployeeRepository;
-import com.ssp.apps.sbrdp.dto.Employee;
+import com.ssp.apps.sbrdp.entity.Employee;
 import com.ssp.apps.sbrdp.exception.DuplicateEmployeeException;
 import com.ssp.apps.sbrdp.exception.EmployeeNotFoundException;
 

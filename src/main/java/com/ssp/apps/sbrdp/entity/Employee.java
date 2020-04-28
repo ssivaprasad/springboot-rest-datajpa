@@ -1,4 +1,4 @@
-package com.ssp.apps.sbrdp.dto;
+package com.ssp.apps.sbrdp.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
