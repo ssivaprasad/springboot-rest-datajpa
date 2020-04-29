@@ -34,9 +34,14 @@ import com.ssp.apps.sbrdp.service.EmployeeService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = EmployeeController.class, excludeFilters = {
         @ComponentScan.Filter(type = FilterType.ANNOTATION, value = EnableWebSecurity.class)})
-// @WebMvcTest(value = EmployeeController.class, excludeFilters = {
-// @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = SecurityConfiguration.class)})
 @AutoConfigureMockMvc(addFilters = false)
+/*
+ * @WebMvcTest(value = EmployeeController.class, excludeFilters = {@ComponentScan.Filter(type =
+ * FilterType.ASSIGNABLE_TYPE, value = SecurityConfiguration.class)})
+ * 
+ * @AutoConfigureMockMvc(addFilters = false)
+ */
+/* @Import(SecurityTestConfiguration.class) */
 public class EmployeeControllerTest {
 
     private static final String APPLICATION_JSON_VALUE = MediaType.APPLICATION_JSON_VALUE;
