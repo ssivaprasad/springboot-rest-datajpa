@@ -6,8 +6,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import com.ssp.apps.sbrdp.jwt.JwtAuthenticationFilter;
+import com.ssp.apps.sbrdp.jwt.JwtAuthorizationFilter;
 import com.ssp.apps.sbrdp.service.UserDetailsService;
 
 @EnableWebSecurity
@@ -51,10 +54,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     // @formatter:off
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      http.authorizeRequests()
+      http
+      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+      .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+      .addFilter(new JwtAuthorizationFilter(authenticationManager()))
+      .authorizeRequests()
       .antMatchers("/admin").hasRole("ADMIN")
       .antMatchers("/employees").hasAnyRole("USER", "ADMIN")
       .antMatchers("/").permitAll().and()
+     // .anyRequest().authenticated()
       .formLogin();
     }
     //@formatter:on
